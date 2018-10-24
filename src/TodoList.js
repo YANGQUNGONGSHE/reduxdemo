@@ -10,17 +10,17 @@ class TodoList extends Component {
 	  constructor(props){
 			super(props);
 			this.state = store.getState();
-			store.subscribe(this.handleStoreChange);
+			// store.subscribe(this.handleStoreChange);
 		}
 		handleOnClick = ()=>{
 			const action = getAddTodoItem();
 			this.dispatchAction(action);
 		}
 
-		handleChange = (e)=>{
-			const action = getChangeInputValue(e.target.value);
-			this.dispatchAction(action);
-		}
+		// handleChange = (e)=>{
+		// 	const action = getChangeInputValue(e.target.value);
+		// 	this.dispatchAction(action);
+		// }
 
 		handleDeleteClick (index){
 			const action = getRemoveTodoItem(index);
@@ -41,7 +41,7 @@ class TodoList extends Component {
 						<Input 
 							style = {{width:300,marginRight:10}}
 							value = {this.props.inputValue}
-							onChange = {this.handleChange}
+							onChange = {this.props.handleChange}
 						/>
 						<Button 
 							type ='primary'
@@ -72,4 +72,12 @@ const mapStateToProps = (state)=>{
 	}
 }
 
-export default connect(mapStateToProps,null)(TodoList);
+const mapDispatchToProps = (dispatch) =>{
+	return{
+		handleChange(e){
+			const action = getChangeInputValue(e.target.value);
+			dispatch(action);
+		}
+	}
+}
+export default connect(mapStateToProps,mapDispatchToProps)(TodoList);
