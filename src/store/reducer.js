@@ -1,7 +1,7 @@
 import actionTypes from './actionTypes';
 const defaultState = {
-  inputValue:'输入数据',
-  list:[1,2,3,4,5,6]
+  inputValue:'',
+  list:[]
 }
 
 export default (state = defaultState,action)=>{
